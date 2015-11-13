@@ -1,4 +1,4 @@
-package me.liyumeng;
+package me.liyumeng.Server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -21,7 +21,7 @@ public class FileServer extends Thread {
             while(true)
             {
                 Socket client=m_ss.accept();    //服务器接受请求
-                Thread handlerThread = new Thread(new MessageHandler(client));  //开启新线程处理请求信息
+                Thread handlerThread = new Thread(new ServerThread(client));  //开启新线程处理请求信息
                 handlerThread.start();
             }
         } catch (IOException e) {
