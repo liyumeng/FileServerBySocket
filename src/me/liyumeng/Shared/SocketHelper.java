@@ -16,6 +16,7 @@ public class SocketHelper {
         FileInputStream fileStream = new FileInputStream(file);
         byte[] sendByte = new byte[1024];
         int length;
+        //循环发送数据
         while ((length = fileStream.read(sendByte, 0, sendByte.length)) > 0) {
             clientStream.write(sendByte, 0, length);
             clientStream.flush();
@@ -36,6 +37,7 @@ public class SocketHelper {
         byte[] inputByte = new byte[1024];
 
         int length;
+        //循环接收数据
         while ((length = clientStream.read(inputByte, 0, inputByte.length)) > 0) {
             fileStream.write(inputByte, 0, length);
             fileStream.flush();

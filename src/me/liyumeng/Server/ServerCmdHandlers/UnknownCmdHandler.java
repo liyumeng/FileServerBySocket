@@ -5,13 +5,12 @@ import java.net.Socket;
 /**
  * Created by Yumeng Li on 2015/11/13 0013.
  */
-public class UnknownCmdHandler implements IServerCmdHandler {
+public class UnknownCmdHandler extends BaseServerCmdHandler {
     String m_cmd;
     Socket m_client;
 
     public UnknownCmdHandler(String cmd, Socket client) {
-        m_cmd = cmd;
-        m_client = client;
+        super(cmd,client);
     }
 
     @Override
