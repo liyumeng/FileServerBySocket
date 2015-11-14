@@ -15,9 +15,14 @@ public class PutCmdHandler extends BaseClientCmdHandler {
         super(cmd, client);
     }
 
+    /**
+     * 在put指令中，首先客户端请求上传文件，
+     * 服务端接收到指令后返回ready信号，
+     * 然后客户端才开始上传
+     */
     @Override
     public void Process() {
-        DataOutputStream outputStream = null;
+        DataOutputStream outputStream;
         try {
             outputStream = new DataOutputStream(m_client.getOutputStream());
 
@@ -25,11 +30,13 @@ public class PutCmdHandler extends BaseClientCmdHandler {
 
             DataInputStream stream = new DataInputStream(m_client.getInputStream());
 
+            //客户端等待服务端的ready信号
             String callback = stream.readUTF();
+            //如果是ready信号
             if (callback.equals("ready:" + m_cmd)) {
                 String[] items = m_cmd.split(" ");
-                SocketHelper.SendFile(items[1], m_client);
-                System.out.println(String.format("文件:%s 已上传到服务器路径：%s。",items[1],items[2]));
+                SocketHelper.SendFile(items[1], m_client);  //客户端开始发送文件
+                System.out.println(String.format("[客户端]文件:%s 已上传到服务器路径：%s。",items[1],items[2]));
             }
 
             m_client.close();

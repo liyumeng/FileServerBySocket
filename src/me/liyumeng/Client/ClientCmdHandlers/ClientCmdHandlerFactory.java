@@ -8,6 +8,7 @@ import java.net.Socket;
 
 /**
  * Created by Yumeng Li on 2015/11/14 0014.
+ * 客户端命令处理的工厂类
  */
 public class ClientCmdHandlerFactory {
 

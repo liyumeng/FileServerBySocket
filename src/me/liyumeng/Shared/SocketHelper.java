@@ -7,6 +7,9 @@ import java.net.Socket;
  * Created by Yumeng Li on 2015/11/14 0014.
  */
 public class SocketHelper {
+    /*
+    发送文件
+     */
     public static void SendFile(String filename, Socket client) throws IOException {
         File file = new File(filename);
         DataOutputStream clientStream = new DataOutputStream(client.getOutputStream());
@@ -17,10 +20,15 @@ public class SocketHelper {
             clientStream.write(sendByte, 0, length);
             clientStream.flush();
         }
+        /*
+         * 文件发送结束后要发送结束标志，这样接收端阻塞的InputStream才能跳出循环
+         */
         client.shutdownOutput();
-
     }
 
+    /*
+    * 接收文件
+    * */
     public static void ReceiveFile(String filename, Socket client) throws IOException {
         DataInputStream clientStream = new DataInputStream(client.getInputStream());
         File file = new File(filename);

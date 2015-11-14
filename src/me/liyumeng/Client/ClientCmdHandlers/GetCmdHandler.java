@@ -23,10 +23,11 @@ public class GetCmdHandler extends BaseClientCmdHandler {
             outputStream.writeUTF(m_cmd);
 
             String[] items = m_cmd.split(" ");
-            SocketHelper.ReceiveFile(items[2], m_client);
+
+            SocketHelper.ReceiveFile(items[2], m_client);   //客户端接收文件
             outputStream.close();
             m_client.close();
-            System.out.println("文件已保存到：" + items[2]);
+            System.out.println("[客户端]文件已保存到：" + items[2]);
         } catch (IOException e) {
             e.printStackTrace();
         }
